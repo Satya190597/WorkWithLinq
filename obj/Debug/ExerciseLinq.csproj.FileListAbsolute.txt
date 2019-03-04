@@ -1,0 +1,6 @@
+D:\satya\asp_dotnet_mvc_applications\ExerciseLinq\ExerciseLinq\bin\Debug\ExerciseLinq.exe.config
+D:\satya\asp_dotnet_mvc_applications\ExerciseLinq\ExerciseLinq\bin\Debug\ExerciseLinq.exe
+D:\satya\asp_dotnet_mvc_applications\ExerciseLinq\ExerciseLinq\bin\Debug\ExerciseLinq.pdb
+D:\satya\asp_dotnet_mvc_applications\ExerciseLinq\ExerciseLinq\obj\Debug\ExerciseLinq.csprojResolveAssemblyReference.cache
+D:\satya\asp_dotnet_mvc_applications\ExerciseLinq\ExerciseLinq\obj\Debug\ExerciseLinq.exe
+D:\satya\asp_dotnet_mvc_applications\ExerciseLinq\ExerciseLinq\obj\Debug\ExerciseLinq.pdb

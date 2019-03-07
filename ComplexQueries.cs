@@ -22,6 +22,53 @@ namespace ExerciseLinq
             standardList.Add(new Standard { StandardId = 2, StandardName = "Standard 2" });
             standardList.Add(new Standard { StandardId = 3, StandardName = "Standard 3" });
         }
+        public void ExampleOne()
+        {
+            var result = studentList.Where(s => s.Age > 18 && s.StandardId == 2).Select(s => new { s.StudentName, s.StudentId });
+            foreach(var name in result)
+            {
+                Console.WriteLine(name.StudentId+" "+name.StudentName);
+            }
+        }
+        public void ExampleTwo()
+        {
+            var result = studentList.Join(standardList, stu => stu.StandardId, stan => stan.StandardId,(stu,stan) => new { stu , stan});
+            Console.WriteLine("Student Id,Student Name,Student Age,Standard Id,Standard Name + [Normal Join] +");
+            foreach(var element in result)
+            {
+                Console.WriteLine("{0} | {1} | {2} | {3} | {4}",element.stu.StudentId,element.stu.StudentName,element.stu.Age,element.stan.StandardId,element.stan.StandardName);
+            }
+        }
+        /// <summary>
+        /// Left Outer Join
+        /// </summary>
+        public void ExampleThree()
+        {
+            var result = studentList.GroupJoin(standardList,stu => stu.StandardId,stan => stan.StandardId,(stu,stan) => new { stu,stan});
+            foreach(var element in result)
+            {
+                Console.WriteLine("Name : "+element.stu.StudentName);
+                foreach(var nextElement in element.stan)
+                {
+                    Console.WriteLine("Satandard : " + nextElement.StandardName);
+                }
+            }
+        }
+        /// <summary>
+        /// Right Outer Join
+        /// </summary>
+        public void ExampleFour()
+        {
+            var result = standardList.GroupJoin(studentList,stan => stan.StandardId,stu => stu.StandardId,(stan,stu) => new { stan,stu});
+            foreach (var element in result)
+            {
+                Console.WriteLine("Name : " + element.stan.StandardName);
+                foreach (var nextElement in element.stu)
+                {
+                    Console.WriteLine("Satandard : " + nextElement.StudentName);
+                }
+            }
+        }
     }
     class StudentInfo
     {

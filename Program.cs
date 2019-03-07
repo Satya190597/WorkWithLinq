@@ -30,6 +30,11 @@ namespace ExerciseLinq
         {
             Program obj = new Program();
 
+            DeferredExecution defferedExecution = new DeferredExecution();
+
+            //-- Calling Deferred Execution --
+            defferedExecution.FirstExample();
+            // -------------------------------
 
             Student studentObject = obj.datasource.FirstOrDefault();
             Console.WriteLine("FIRST STUDENT NAME {0}, AGE {1}, ID {2}", studentObject.StudentName,studentObject.StudentAge,studentObject.StudentAge);

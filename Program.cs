@@ -34,6 +34,8 @@ namespace ExerciseLinq
 
             //-- Calling Deferred Execution --
             defferedExecution.FirstExample();
+            defferedExecution.SecondExample();
+            defferedExecution.ThirdExample();
             // -------------------------------
 
             Student studentObject = obj.datasource.FirstOrDefault();

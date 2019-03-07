@@ -32,6 +32,46 @@ namespace ExerciseLinq
             }
             Console.WriteLine();
         }
+        /// <summary>
+        /// Custom Defereed Execution Example Using yield Keyword
+        /// </summary>
+        public void SecondExample()
+        {
+            Console.Write("User Names : ");
+            var result = CustomDeferredFunction(dataSource);
+            foreach(User user in result)
+            {
+                Console.Write(user.UserName+" | ");
+            }
+            Console.WriteLine();
+        }
+        public IEnumerable<User> CustomDeferredFunction(IEnumerable<User> users)
+        {
+            foreach(User user in users)
+            {
+                yield return user;
+            }
+        }
+        /// <summary>
+        /// Simple Example Of yield keyword
+        /// </summary>
+        public void ThirdExample()
+        {
+            Console.Write("Numbers : ");
+            foreach(int number in GetNumbers())
+            {
+                Console.Write(number+" | ");
+            }
+            Console.WriteLine();
+        }
+        public IEnumerable<int> GetNumbers()
+        {
+            yield return 1;
+            yield return 2;
+            yield return 3;
+            yield return 4;
+            yield return 5;
+        }
     }
     class User
     {

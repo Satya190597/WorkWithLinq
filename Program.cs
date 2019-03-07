@@ -10,6 +10,7 @@ namespace ExerciseLinq
     class Program
     {
         private List<Student> datasource = new List<Student>();
+        private List<Student> secondDatasource = new List<Student>();
         public Program()
         {
             datasource.Add(new Student { StudentId = 1, StudentName = "Satya Prakash Nandy", StudentAge = 21 });
@@ -18,10 +19,18 @@ namespace ExerciseLinq
             datasource.Add(new Student { StudentId = 4, StudentName = "Altamash", StudentAge = 18 });
             datasource.Add(new Student { StudentId = 5, StudentName = "Manoj Kumar", StudentAge = 22 });
             datasource.Add(new Student { StudentId = 6, StudentName = "Pooja Purty", StudentAge = 21 });
+
+            secondDatasource.Add(new Student { StudentId = 7, StudentName = "Tara Pada Nandy", StudentAge = 21});
+            secondDatasource.Add(new Student { StudentId = 3, StudentName = "Sabita Nandy", StudentAge = 18 });
+            secondDatasource.Add(new Student { StudentId = 4, StudentName = "Ranjit", StudentAge = 11 });
+
+
         }
         static void Main(string[] args)
         {
             Program obj = new Program();
+
+
             Student studentObject = obj.datasource.FirstOrDefault();
             Console.WriteLine("FIRST STUDENT NAME {0}, AGE {1}, ID {2}", studentObject.StudentName,studentObject.StudentAge,studentObject.StudentAge);
 
@@ -108,8 +117,73 @@ namespace ExerciseLinq
                 Console.WriteLine("Unable To Generate Error : {0}",e);
             }
 
+            // -- Use Of Distict --
+
+            // >> Working With List
+            List<int> numberList = new List<int>() { 1,2,3,4,5,6,7,8,9,1,2,3,4,5,6,7,8,9 };
+            Console.Write("List Number After Distinct : ");
+            foreach(int number in numberList.Distinct())
+            {
+                Console.Write(number+" ");
+            }
+
+            // >> Working With Multiple List
+
+            List<int> numberListTwo = new List<int>() { 5, 5, 6, 6, 9, 9 };
+            Console.WriteLine("\nFirst List");
+            foreach(int number in numberList)
+            {
+                Console.Write(number + " ");
+            }
+            Console.WriteLine("\nSecond List");
+            foreach(int number in numberListTwo)
+            {
+                Console.Write(number + " ");
+            }
+            Console.Write("\nTwo List After Distinct : ");
+            foreach(int number in numberList.Union(numberListTwo).Distinct())
+            {
+                Console.Write(number + " ");
+            }
+
+            // -- Distinct On Complex Object --
+
+            Console.WriteLine("\n This is my student List Without Custom Equality");
+            foreach(Student student in obj.datasource.Distinct())
+            {
+                Console.Write(student.StudentName+" ");
+            }
+
+            Console.WriteLine("\n This is my student List With Custom Equality");
+            foreach (Student student in obj.datasource.Distinct(new StudentComparer()))
+            {
+                Console.Write(student.StudentName+" ");
+            }
+            // --------------------
+
+            // -- Working With Except --
+
+            Console.WriteLine("\n Working With Except On Complex Type [Using Projection Method]");
+            var data = obj.datasource.Select(s => new { StudentAge = s.StudentAge }).Except(obj.secondDatasource.Select(s => new { StudentAge = s.StudentAge }));
+            
+
+            // -------------------------
+
+
             // -- Stop Console --
             Console.Read();
+        }
+    }
+    class StudentComparer : IEqualityComparer<Student>
+    {
+        public bool Equals(Student x, Student y)
+        {
+            return x.StudentAge == y.StudentAge ? true : false;
+        }
+
+        public int GetHashCode(Student obj)
+        {
+            return obj.StudentAge.GetHashCode();
         }
     }
 }

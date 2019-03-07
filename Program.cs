@@ -30,6 +30,10 @@ namespace ExerciseLinq
         {
             Program obj = new Program();
 
+            // -- Let Style Query In Method Syntaxt --
+            LetInLinqMethodSynatx letInLinqMethodSynatx = new LetInLinqMethodSynatx();
+            letInLinqMethodSynatx.ExampleOne();
+            // ---------------------------------------
 
             Student studentObject = obj.datasource.FirstOrDefault();
             Console.WriteLine("FIRST STUDENT NAME {0}, AGE {1}, ID {2}", studentObject.StudentName,studentObject.StudentAge,studentObject.StudentAge);
